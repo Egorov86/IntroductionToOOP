@@ -31,9 +31,10 @@ public:
 	{
 		this ->y = y;
 	}
-	/*double distance(const Point& AB) // метод
+	/*double distance(const Point& AB) // пробовал метод 
 	{
-		return sqrt((B.get_x() - A.get_x()) * (B.get_x() - A.get_x()) + (B.get_y() - A.get_y()) * (B.get_y() - A.get_y()));
+		return sqrt((B.get_x() - A.get_x()) * (B.get_x() - A.get_x()) + 
+		(B.get_y() - A.get_y()) * (B.get_y() - A.get_y()));
 	}
 	double distance(const Point& A, const Point& B) // функция расстояние между точками
 	{
