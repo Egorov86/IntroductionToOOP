@@ -35,13 +35,13 @@ public:
 	{
 		return sqrt((B.get_x() - A.get_x()) * (B.get_x() - A.get_x()) + 
 		(B.get_y() - A.get_y()) * (B.get_y() - A.get_y()));
-	}
-	double distance(const Point& A, const Point& B) // функция расстояние между точками
-	{
-		return sqrt((B.get_x() - A.get_x()) * (B.get_x() - A.get_x()) +
-			(B.get_y() - A.get_y()) * (B.get_y() - A.get_y()));
 	}*/
 };
+double distance(const Point& A, const Point& B) // функция расстояние между точками
+{
+	return sqrt((B.get_x() - A.get_x()) * (B.get_x() - A.get_x()) +
+		(B.get_y() - A.get_y()) * (B.get_y() - A.get_y()));
+}
 
 //#define STRUCT_POINT
 
@@ -74,9 +74,9 @@ void main()
 	B.set_y(4);
 	cout << B.get_x() << "\t" << B.get_y() << endl;
 
-	/*double AB;
+	double AB;
 	AB = distance(A, B);
-	cout << "Расстояние между точками A и B: " << AB << endl;*/
+	cout << "Расстояние между точками A и B: " << AB << endl;
 }
 
 /*
