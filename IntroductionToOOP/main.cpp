@@ -1,6 +1,12 @@
 //IntroductionToOOP
 #include<iostream>
+#include <cmath> // для корня
 using namespace std;
+using std::cin;
+using std::cout;
+using std::endl;
+
+//double distance(const Point& A, const Point& B);
 
 //Создавая структуру или класс мы создаем новый тип данных
 class Point
@@ -25,6 +31,15 @@ public:
 	{
 		this ->y = y;
 	}
+	/*double distance(const Point& AB) // метод
+	{
+		return sqrt((B.get_x() - A.get_x()) * (B.get_x() - A.get_x()) + (B.get_y() - A.get_y()) * (B.get_y() - A.get_y()));
+	}
+	double distance(const Point& A, const Point& B) // функция расстояние между точками
+	{
+		return sqrt((B.get_x() - A.get_x()) * (B.get_x() - A.get_x()) +
+			(B.get_y() - A.get_y()) * (B.get_y() - A.get_y()));
+	}*/
 };
 
 //#define STRUCT_POINT
@@ -53,6 +68,14 @@ void main()
 	A.set_x(2);
 	A.set_y(3);
 	cout << A.get_x() << "\t" << A.get_y() << endl;
+	Point B;
+	B.set_x(3);
+	B.set_y(4);
+	cout << B.get_x() << "\t" << B.get_y() << endl;
+
+	/*double AB;
+	AB = distance(A, B);
+	cout << "Расстояние между точками A и B: " << AB << endl;*/
 }
 
 /*
