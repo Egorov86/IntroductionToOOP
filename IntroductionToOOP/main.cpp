@@ -66,6 +66,22 @@ public:
 		cout << "CopyAssignment:\t\t" << this << endl;
 		return *this;
 	}
+
+	Point& operator++() //Prefix increment
+	{
+		x++;
+		y++;
+		return *this;
+	}
+
+	Point operator++(int) //Postfix increment
+	{
+		Point old = *this;
+		x++;
+		y++;
+		return old;
+
+	}
 	          // Methods;
 
     double distance(const Point& other) const // метод - это функция внитри класса
@@ -90,12 +106,49 @@ double distance(const Point& A, const Point& B) // функция расстоя
 	double x_distantce = A.get_x() - B.get_x();
 	double y_distantce = A.get_y() - B.get_y();
 	return sqrt(x_distantce * x_distantce + y_distantce * y_distantce);
+
 }
+
+Point operator+(const Point& left, const Point& right)
+{
+	Point result;
+	result.set_x(left.get_x() + right.get_x());
+	result.set_y(left.get_y() + right.get_y());
+	return result;
+}
+
+Point operator-(const Point& left, const Point& right)
+{
+	Point result
+	(
+		left.get_x() - right.get_x(),
+		left.get_y() - right.get_y()
+	);
+	return result;
+}
+
+Point operator*(const Point& left, const Point& right)
+{
+	return Point
+	(
+		left.get_x() * right.get_x(),
+		left.get_y() * right.get_y()
+	);
+}
+
+bool operator==(const Point& left, const Point& right)
+{
+	return left.get_x() == right.get_x() && left.get_y() == right.get_y();
+	//(left.get_x() == right.get_x() && left.get_y() == right.get_y()) ? true : false;
+
+}
+
 
 //#define STRUCT_POINT
 //#define DISTANCE_CHECK
 //#define CONSTRUCTORS_CHECK
-#define ASSIGNMENT_CHECK
+//#define ASSIGNMENT_CHECK
+//#define ARIFMETICAL_OPERATORS_CHECK
 
 void main()
 {
@@ -173,6 +226,26 @@ void main()
 	C.print();
 
 #endif // ASSIGNMENT_CHECK
+
+#ifdef ARIFMETICAL_OPERATORS_CHECK
+
+
+	Point A(2, 3);
+	Point B(7, 8);
+	A.print();
+	B.print();
+
+	Point C = A * B;
+	C.print();
+
+	C++;
+	C.print();
+	++C;
+	C.print();
+#endif // ARIFMETICAL_OPERATORS_CHECK
+	
+	//cout << (2 == 3) << endl;
+	cout << (Point(2, 3) == Point(2, 3)) << endl;
 
 }
 /*
