@@ -8,7 +8,9 @@ using::endl;
 class Fraction
 {
 private:
-	int n, d; // дадим значения по умолчанию
+	int numerator;
+	int integer;
+	int denominator;
 
 public:
 	/*int numer, denom;
@@ -17,81 +19,120 @@ public:
 		numer = n;
 		denom = d;
 	}*/
-	int get_n()const
+	int get_integer()const
 	{
-		return n;
+		return integer;
 	}
-	int get_d()const
+	int get_numerator()const
 	{
-		return d;
+		return numerator;
 	}
-	void set_n(int n)
+	int get_denominator()const
 	{
-		this->n = n;
+		return denominator;
 	}
-	void set_d(int d)
+	void set_integer(int integer)
 	{
-		this->d = d;
+		this->integer = integer;
 	}
+	void set_numerator(int numerator)
+	{
+		this->numerator = numerator;
+	}
+	void set_denominator(int denominator)
+	{
+		if (denominator == 0)denominator = 1;
+		this->denominator = denominator;
+	}
+
+	 //  Constructors:
+	Fraction()
+	{
+		integer = 0;
+	    numerator = 0;
+	    denominator = 1;
+		cout << "DefaultConstructor:\t" << this << endl;
+	}
+	Fraction(int integer)
+	{
+		this->integer = integer;
+		this->numerator = 0;
+		this->denominator = 1;
+		cout << "1ArgConstructor:\t" << this << endl;
+	}
+	Fraction(int numerator, int denominator)
+	{
+		this->integer = 0;
+		this->numerator = numerator;
+		this->set_denominator(denominator);
+		cout << "Constructor:\t\t" << this << endl;
+	}
+	Fraction(int integer, int numerator, int denominator)
+	{
+		this->integer = integer;
+		this->numerator = numerator;
+		this->set_denominator(denominator); // фильтрация
+		cout << "Constructor:\t\t" << this << endl;
+	}
+	Fraction(const Fraction& other)
+	{
+		this->integer = other.integer;
+		this->numerator = other.numerator;
+		this->denominator = other.denominator;
+		cout << "CopyConstructor:\t" << this << endl;
+	}
+	~Fraction()
+	{
+		cout << "Destructor:\t\t" << this << endl;
+	}
+
+	//            Operator:
+	Fraction& operator=(const Fraction& other)
+	{
+		this->integer = other.integer;
+		this->numerator = other.numerator;
+		this->denominator = other.denominator;
+		cout << "CopyAssignment:\t\t" << this << endl;
+		return *this;
+	}
+
+	void print()const
+	{
+		if (integer)cout << integer;
+		if (numerator)
+		{
+			if (integer)cout << "(";
+			cout << numerator << "/" << denominator;
+			if (integer)cout << ")";
+		}
+		else if (integer == 0) cout << 0;
+		cout << endl;
+	}
+
 
 };
 
-Fraction operator+(const Fraction& left, const Fraction& right)  // сложение простых дробей
-{
-	Fraction result;
-	result.set_n((left.get_n()* right.get_d()) + (right.get_n()* left.get_d()));
-	result.set_d(left.get_d() * right.get_d());
-	return result;
-}
 
-Fraction operator-(const Fraction& left, const Fraction& right)   // вычитание простых дробей
-{
-	Fraction result;
-	result.set_n((left.get_n() * right.get_d()) - (right.get_n() * left.get_d()));
-	result.set_d(left.get_d() * right.get_d());
-	return result;
-}
 
-Fraction operator*(const Fraction& left, const Fraction& right)  // умножение простых дробей
-{
-	Fraction result;
-	result.set_n(left.get_n() * right.get_n());
-	result.set_d(left.get_d() * right.get_d());
-	return result;
-}
-
-Fraction operator/(const Fraction& left, const Fraction& right)  // деление простых дробей
-{
-	Fraction result; 
-	result.set_n(left.get_n() * right.get_d());
-	result.set_d(left.get_d() * right.get_n());
-	return result;
-}
 void main()
 {
 	setlocale(LC_ALL, "Rus");
+	Fraction A;           //Default constructor
+	A.print();
+	
+	Fraction B = 5;       //Single-argument constructor
+	B.print();
 
-	Fraction A;
-	A.set_n(2);
-	A.set_d(3);
+	Fraction C(1, 2);
+	C.print();
 
-	Fraction B;
-	B.set_n(1);
-	B.set_d(4);
+	Fraction D(2, 3, 4);
+	D.print();
 
-	cout << "Первая дробь     Числитель: = " << A.get_n() << "  Знаменатель: = " << A.get_d() << endl;
-	cout << "Вторая дробь     Числитель: = " << B.get_n() << "  Знаменатель: = " << B.get_d() << endl;
+	Fraction E = D;
+	E.print();
 
-	Fraction C = A + B;
-	cout << "Сложение дробей  Числитель: = " << C.get_n() << "  Знаменатель: = " << C.get_d() << endl;
-
-	Fraction D = A - B;
-	cout << "Вычитание дробей Числитель: = " << D.get_n() << "  Знаменатель: = " << D.get_d() << endl;
-
-	Fraction N = A * B;
-	cout << "Умножение дробей Числитель: = " << N.get_n() << "  Знаменатель: = " << N.get_d() << endl;
-
-	Fraction M = A / B;
-	cout << "Деление дробей   Числитель: = " << M.get_n() << "  Знаменатель: = " << M.get_d() << endl;
-
+	Fraction F;
+	F = E;
+	F.print();
 }
