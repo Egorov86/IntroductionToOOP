@@ -8,7 +8,7 @@ using::endl;
 class Fraction
 {
 private:
-	int n, d;
+	int n, d; // дадим значения по умолчанию
 
 public:
 	/*int numer, denom;
@@ -33,37 +33,65 @@ public:
 	{
 		this->d = d;
 	}
-	Fraction( int set_n = 0, int set_d = 1) // если у числитель будет записано одно число, то получится целое
-	{
-	}
-	/*int Fraction(const Fraction& other) const
-	{
-		int n_fraction = this->n;
-		int d_fraction = this->d;
-		return n_fraction / d_fraction;
-	}
-
-	Fraction operator+ (Fraction& other)
-	{
-		return
-			Fraction(
-			n * other.d + n * other.n,
-			n * other.d);
-	}*/
-
 
 };
 
+Fraction operator+(const Fraction& left, const Fraction& right)  // сложение простых дробей
+{
+	Fraction result;
+	result.set_n((left.get_n()* right.get_d()) + (right.get_n()* left.get_d()));
+	result.set_d(left.get_d() * right.get_d());
+	return result;
+}
+
+Fraction operator-(const Fraction& left, const Fraction& right)   // вычитание простых дробей
+{
+	Fraction result;
+	result.set_n((left.get_n() * right.get_d()) - (right.get_n() * left.get_d()));
+	result.set_d(left.get_d() * right.get_d());
+	return result;
+}
+
+Fraction operator*(const Fraction& left, const Fraction& right)  // умножение простых дробей
+{
+	Fraction result;
+	result.set_n(left.get_n() * right.get_n());
+	result.set_d(left.get_d() * right.get_d());
+	return result;
+}
+
+Fraction operator/(const Fraction& left, const Fraction& right)  // деление простых дробей
+{
+	Fraction result; 
+	result.set_n(left.get_n() * right.get_d());
+	result.set_d(left.get_d() * right.get_n());
+	return result;
+}
 void main()
 {
 	setlocale(LC_ALL, "Rus");
 
-	Fraction n, d;
-	n.set_n(2);
-	d.set_d(5);
-	n.set_n(3);
+	Fraction A;
+	A.set_n(2);
+	A.set_d(3);
 
-	cout << "Числитель: = " << n.get_n() << endl;
-	cout << "Знаменатель: = " << d.get_d() << endl;
+	Fraction B;
+	B.set_n(1);
+	B.set_d(4);
+
+	cout << "Первая дробь     Числитель: = " << A.get_n() << "  Знаменатель: = " << A.get_d() << endl;
+	cout << "Вторая дробь     Числитель: = " << B.get_n() << "  Знаменатель: = " << B.get_d() << endl;
+
+	Fraction C = A + B;
+	cout << "Сложение дробей  Числитель: = " << C.get_n() << "  Знаменатель: = " << C.get_d() << endl;
+
+	Fraction D = A - B;
+	cout << "Вычитание дробей Числитель: = " << D.get_n() << "  Знаменатель: = " << D.get_d() << endl;
+
+	Fraction N = A * B;
+	cout << "Умножение дробей Числитель: = " << N.get_n() << "  Знаменатель: = " << N.get_d() << endl;
+
+	Fraction M = A / B;
+	cout << "Деление дробей   Числитель: = " << M.get_n() << "  Знаменатель: = " << M.get_d() << endl;
 
 }
