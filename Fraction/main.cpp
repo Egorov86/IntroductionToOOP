@@ -109,6 +109,13 @@ public:
 		integer = 0;
 		return *this;
 	}
+	Fraction inverted()const
+	{
+		Fraction inverted = *this;
+		inverted.to_improper();
+		swap(inverted.numerator, inverted.denominator);   //swap - меняет местами 
+		return inverted;
+	}
 
 	void print()const
 	{
@@ -136,6 +143,12 @@ Fraction operator*(Fraction left, Fraction right) // передаем по зн�
 		left.get_numerator() * right.get_numerator(),
 		left.get_denominator() * right.get_denominator()
 	).to_proper();
+}
+
+Fraction operator/(const Fraction& left, const Fraction& right) // передаем по значению т.к. чтобы не 
+{                                                 // изменять объекты а лишь менять его копии
+
+	return left * right.inverted();
 }
 
 //#define CONSTRUCTORS_CHECK
@@ -178,10 +191,9 @@ void main()
 	Fraction B(3, 4, 5);
 	B.print();
 
-	Fraction C = A * B;
+	Fraction C = A / B;
 	C.print();
 
 	A.print();
 	B.print();
-
 }
