@@ -71,7 +71,7 @@ public:
 	{
 		this->integer = integer;
 		this->numerator = numerator;
-		this->set_denominator(denominator); // фильтрация
+		this->set_denominator(denominator); // фильтрация данных 0 преобразуем в 1
 		cout << "Constructor:\t\t" << this << endl;
 	}
 	Fraction(const Fraction& other)
@@ -96,6 +96,20 @@ public:
 		return *this;
 	}
 
+	//       Method:
+	Fraction& to_proper()
+	{
+		integer += numerator / denominator;
+		numerator %= denominator;
+		return *this;
+	}
+	Fraction& to_improper()   // not const потому что изменяет поля класса(изменяет Объект)
+	{
+		numerator += integer * denominator;
+		integer = 0;
+		return *this;
+	}
+
 	void print()const
 	{
 		if (integer)cout << integer;
@@ -112,27 +126,62 @@ public:
 
 };
 
+Fraction operator*(Fraction left, Fraction right) // передаем по значению т.к. чтобы не 
+{                                                 // изменять объекты а лишь менять его копии
+	left.to_improper();
+	right.to_improper();
+
+	return Fraction
+	(
+		left.get_numerator() * right.get_numerator(),
+		left.get_denominator() * right.get_denominator()
+	).to_proper();
+}
+
+//#define CONSTRUCTORS_CHECK
 
 
 void main()
 {
 	setlocale(LC_ALL, "Rus");
+#ifdef CONSTRUCTORS_CHECK
 	Fraction A;           //Default constructor
 	A.print();
 	
 	Fraction B = 5;       //Single-argument constructor
 	B.print();
 
-	Fraction C(1, 2);
+	Fraction C(1, 2);     // Конструктор с 2-мя параметрами
 	C.print();
 
-	Fraction D(2, 3, 4);
+	Fraction D(2, 3, 4);   // Конструктор с 3-мя параметрами
 	D.print();
 
-	Fraction E = D;
-	E.print();
+	Fraction E = D;        // Конструктор копирования
+	E.print();              
 
-	Fraction F;
+	Fraction F;            // Конструктор присваивания
 	F = E;
 	F.print();
+#endif // CONSTRUCTORS_CHECK
+
+	/*Fraction A(2, 3, 4);
+	A.to_improper();          //перевод дроби в неправильную дробь
+	A.print();
+
+	A.to_proper();            //перевод дроби в правильную дробь, выделение целой части
+	A.print();*/
+
+	Fraction A(2, 3, 4);
+	A.print();
+
+	Fraction B(3, 4, 5);
+	B.print();
+
+	Fraction C = A * B;
+	C.print();
+
+	A.print();
+	B.print();
+
 }
