@@ -145,10 +145,33 @@ Fraction operator*(Fraction left, Fraction right) // передаем по зн�
 	).to_proper();
 }
 
-Fraction operator/(const Fraction& left, const Fraction& right) // передаем по значению т.к. чтобы не 
-{                                                 // изменять объекты а лишь менять его копии
+Fraction operator/(const Fraction& left, const Fraction& right) 
+{                                                 
 
 	return left * right.inverted();
+}
+
+Fraction operator+(Fraction left, Fraction right) 
+{                                                 
+	left.to_improper();
+	right.to_improper();
+
+	return Fraction
+	(
+		(left.get_numerator()*right.get_denominator())+ (right.get_numerator()* left.get_denominator()),
+		left.get_denominator() * right.get_denominator()
+	).to_proper();
+}
+Fraction operator-(Fraction left, Fraction right) 
+{                                                 
+	left.to_improper();
+	right.to_improper();
+
+	return Fraction
+	(
+		(left.get_numerator() * right.get_denominator()) - (right.get_numerator() * left.get_denominator()),
+		left.get_denominator() * right.get_denominator()
+	).to_proper();
 }
 
 //#define CONSTRUCTORS_CHECK
@@ -191,9 +214,10 @@ void main()
 	Fraction B(3, 4, 5);
 	B.print();
 
-	Fraction C = A / B;
+	Fraction C = A +B;
 	C.print();
 
 	A.print();
 	B.print();
+
 }
