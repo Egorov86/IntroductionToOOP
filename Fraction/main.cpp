@@ -297,6 +297,7 @@ std::ostream& operator<<(std::ostream& os, const Fraction& obj)
 //#define CONSTRUCTORS_CHECK
 //#define ARIFMETICAL_OPERATORS_CHEK
 //#define COMPARISON_OPERATORS_CHECK
+#define STREAMS_CHECK
 
 void main()
 {
@@ -362,13 +363,14 @@ void main()
 	cout << (Fraction(1, 3) >= Fraction(5, 11)) << endl;
 #endif // COMPARISON_OPERATORS_CHECK
 
+#ifdef STREAMS_CHECK
+
+
 	Fraction A(2, 3, 4);
-
-
-
-
+	cout << "Введите дробь: " <<endl;
 	cout << A << endl;
 
 
+#endif // STREAMS_CHECK
 
 }
