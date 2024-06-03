@@ -1,9 +1,14 @@
 ﻿//Fraction
 #include<iostream>
+#pragma warning(3426)
 using namespace std;
 using::cin;
 using::cout;
 using::endl;
+
+class Fraction;
+Fraction operator*(Fraction left, Fraction right);
+Fraction operator/(const Fraction& left, const Fraction& right);
 
 class Fraction
 {
@@ -96,17 +101,24 @@ public:
 		return *this;
 	}
 
-	Fraction& operator++ ()                //префиксный инкремент
+	Fraction& operator*=(const Fraction& other)
 	{
-		numerator += denominator;
-		to_proper();
+		return *this = *this*other;
+	}
+	Fraction& operator/=(const Fraction& other)
+	{
+		return *this = *this / other;
+	}
+
+	Fraction& operator++ ()                //префиксный инкремент выс приро
+	{
+		integer++;
 		return *this;
 	}
-	Fraction operator++ (int)               //постфиксный инкремент
+	Fraction operator++ (int)               //постфиксный инкремент   низк приор
 	{
 		Fraction old = *this;
-		numerator += denominator;
-		to_proper();
+		integer ++;
 		return old;
 	}
 	Fraction& operator-- ()                //префиксный декремент
@@ -142,6 +154,22 @@ public:
 	}*/
 
 	//       Method:
+	Fraction& reduce()
+	{
+		int more, less, rest;
+		if (numerator > denominator)more = numerator, less = denominator;
+		else more = denominator, less = numerator;
+		do
+		{
+			rest = more % less;
+			more = less;
+			less = rest;
+		} while (rest);
+		int GCD = more; //GDD - Greatest Common Divesor
+		numerator /= GCD;
+		denominator /= GCD;
+		return *this;
+	}
 	Fraction& to_proper()
 	{
 		integer += numerator / denominator;
@@ -187,7 +215,7 @@ Fraction operator*(Fraction left, Fraction right) // передаем по зн�
 	(
 		left.get_numerator() * right.get_numerator(),
 		left.get_denominator() * right.get_denominator()
-	).to_proper();
+	).to_proper().reduce();
 }
 
 Fraction operator/(const Fraction& left, const Fraction& right)    // Деление
@@ -195,7 +223,41 @@ Fraction operator/(const Fraction& left, const Fraction& right)    // Делен
 
 	return left * right.inverted();
 }
-
+   //              Comperisan operator
+bool operator==(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	return 
+		left.get_numerator() * right.get_denominator() == 
+		right.get_numerator() * left.get_denominator();
+}
+bool operator!=(const Fraction left, const Fraction right)
+{
+	return!(left == right);
+}
+bool operator>(Fraction left, Fraction right)
+{
+	return
+		left.get_numerator() * right.get_denominator() >
+		right.get_numerator() * left.get_denominator();
+}
+bool operator< (Fraction left, Fraction right)
+{
+	return
+		left.get_numerator() * right.get_denominator() <
+		right.get_numerator() * left.get_denominator();
+}
+bool operator<=(const Fraction& left, const Fraction& right)
+{
+	return !(left > right);  // побитовые операции всегда быстрее обрабаотываются процессором
+	//return left < right || left == right;
+}
+bool operator>=(const Fraction& left, const Fraction& right)
+{
+	return !(left < right);
+	//return left > right || left == right;
+}
 Fraction operator+(Fraction left, Fraction right)            // Сложение
 {                                                 
 	left.to_improper();
@@ -219,8 +281,22 @@ Fraction operator-(Fraction left, Fraction right)             // Вычитан�
 	).to_proper();
 }
 
-//#define CONSTRUCTORS_CHECK
+std::ostream& operator<<(std::ostream& os, const Fraction& obj)
+{
+	if (obj.get_integer())os << obj.get_integer();
+	if (obj.get_numerator())
+	{
+		if (obj.get_integer())os << "(";
+		os << obj.get_numerator() << "/" << obj.get_denominator();
+		if (obj.get_integer())os << ")";
+	}
+	else if (obj.get_integer() == 0) os << 0;
+	return os;
+}
 
+//#define CONSTRUCTORS_CHECK
+//#define ARIFMETICAL_OPERATORS_CHEK
+//#define COMPARISON_OPERATORS_CHECK
 
 void main()
 {
@@ -246,6 +322,9 @@ void main()
 	F.print();
 #endif // CONSTRUCTORS_CHECK
 
+#ifdef ARIFMETICAL_OPERATORS_CHEK
+
+
 	/*Fraction A(2, 3, 4);
 	A.to_improper();          //перевод дроби в неправильную дробь
 	A.print();
@@ -262,11 +341,34 @@ void main()
 	Fraction C = A +B;
 	C.print();
 
-	A.print();
-	B.print();
+	/*(C++).print();
+	C.print();*/
 
-	B ++;
-	B.print();
+	/*int a = 2;
+	++++++++++++++++++++++a;
+	a++++++++++++++++++++++;
+	cout << a << endl;*/
+	A*= B;
+	A.print();
+
+	A/= B;
+	A.print();
+#endif // ARIFMETICAL_OPERATORS_CHEK
+
+#ifdef COMPARISON_OPERATORS_CHECK
+
+
+	cout << (2 == 3) << endl;
+	cout << (Fraction(1, 3) >= Fraction(5, 11)) << endl;
+#endif // COMPARISON_OPERATORS_CHECK
+
+	Fraction A(2, 3, 4);
+
+
+
+
+	cout << A << endl;
+
 
 
 }
