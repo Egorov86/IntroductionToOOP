@@ -96,6 +96,51 @@ public:
 		return *this;
 	}
 
+	Fraction& operator++ ()                //префиксный инкремент
+	{
+		numerator += denominator;
+		to_proper();
+		return *this;
+	}
+	Fraction operator++ (int)               //постфиксный инкремент
+	{
+		Fraction old = *this;
+		numerator += denominator;
+		to_proper();
+		return old;
+	}
+	Fraction& operator-- ()                //префиксный декремент
+	{
+		numerator -= denominator;
+		to_proper();
+		return *this;
+	}
+	Fraction operator-- (int)               //постфиксный декремент
+	{
+		Fraction old = *this;
+		numerator -= denominator;
+		to_proper();
+		return old;
+	}
+
+	Fraction operator += (const Fraction& other)
+	{
+		to_improper();
+		numerator = numerator * other.denominator + other.numerator*denominator;
+		denominator = denominator * other.denominator;
+		to_proper();
+		return *this;
+	}
+
+	Fraction operator -= (const Fraction& other)
+	{
+		to_improper();
+		numerator = numerator * other.denominator - other.numerator * denominator;
+		denominator = denominator * other.denominator;
+		to_proper();
+		return *this;
+	}
+
 	//       Method:
 	Fraction& to_proper()
 	{
@@ -113,7 +158,7 @@ public:
 	{
 		Fraction inverted = *this;
 		inverted.to_improper();
-		swap(inverted.numerator, inverted.denominator);   //swap - меняет местами 
+		swap(inverted.numerator, inverted.denominator);   //swap - меняет местами числитель и знаменатель
 		return inverted;
 	}
 
@@ -145,13 +190,13 @@ Fraction operator*(Fraction left, Fraction right) // передаем по зн�
 	).to_proper();
 }
 
-Fraction operator/(const Fraction& left, const Fraction& right) 
+Fraction operator/(const Fraction& left, const Fraction& right)    // Деление
 {                                                 
 
 	return left * right.inverted();
 }
 
-Fraction operator+(Fraction left, Fraction right) 
+Fraction operator+(Fraction left, Fraction right)            // Сложение
 {                                                 
 	left.to_improper();
 	right.to_improper();
@@ -162,7 +207,7 @@ Fraction operator+(Fraction left, Fraction right)
 		left.get_denominator() * right.get_denominator()
 	).to_proper();
 }
-Fraction operator-(Fraction left, Fraction right) 
+Fraction operator-(Fraction left, Fraction right)             // Вычитание
 {                                                 
 	left.to_improper();
 	right.to_improper();
@@ -219,5 +264,9 @@ void main()
 
 	A.print();
 	B.print();
+
+	B -= A;
+	B.print();
+
 
 }
