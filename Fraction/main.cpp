@@ -123,7 +123,7 @@ public:
 		return old;
 	}
 
-	Fraction operator += (const Fraction& other)
+	/*Fraction operator += (const Fraction& other)
 	{
 		to_improper();
 		numerator = numerator * other.denominator + other.numerator*denominator;
@@ -139,7 +139,7 @@ public:
 		denominator = denominator * other.denominator;
 		to_proper();
 		return *this;
-	}
+	}*/
 
 	//       Method:
 	Fraction& to_proper()
@@ -265,7 +265,7 @@ void main()
 	A.print();
 	B.print();
 
-	B -= A;
+	B ++;
 	B.print();
 
 
