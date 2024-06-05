@@ -294,6 +294,19 @@ std::ostream& operator<<(std::ostream& os, const Fraction& obj)
 	return os;
 }
 
+std::istream& operator>>(std::istream& cin, Fraction& obj)         //Класс istream  обеспечивает работу потоков соответственно ввода.
+{                                                          
+	int integer, numerator, denominator;
+	/*string int_tr = "Введите целую часть: ";
+	string num_tr = "Введите числитель дроби: ";
+	string denom_tr = "Введите знаменатель дроби: ";*/
+	cin >> integer >> numerator >> denominator;
+	obj.set_integer(integer);
+	obj.set_numerator(numerator);
+	obj.set_denominator(denominator);
+	return cin;
+}
+
 //#define CONSTRUCTORS_CHECK
 //#define ARIFMETICAL_OPERATORS_CHEK
 //#define COMPARISON_OPERATORS_CHECK
@@ -367,7 +380,7 @@ void main()
 
 
 	Fraction A(2, 3, 4);
-	cout << "Введите дробь: " <<endl;
+	cout << "Введите простую дробь: "; cin >> A;
 	cout << A << endl;
 
 
