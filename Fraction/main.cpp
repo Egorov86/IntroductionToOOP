@@ -301,7 +301,7 @@ std::istream& operator>>(std::istream& cin, Fraction& obj)         //Класс 
 	obj.set_integer(integer);
 	obj.set_numerator(numerator);
 	obj.set_denominator(denominator);
-	return cin.;
+	return cin;
 }
 
 //#define CONSTRUCTORS_CHECK
