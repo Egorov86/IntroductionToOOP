@@ -1,6 +1,6 @@
 ﻿//Fraction
 #include<iostream>
-#pragma warning(3426)
+#pragma warning(disable:4326)
 using namespace std;
 using::cin;
 using::cout;
@@ -297,14 +297,11 @@ std::ostream& operator<<(std::ostream& os, const Fraction& obj)
 std::istream& operator>>(std::istream& cin, Fraction& obj)         //Класс istream  обеспечивает работу потоков соответственно ввода.
 {                                                          
 	int integer, numerator, denominator;
-	/*string int_tr = "Введите целую часть: ";
-	string num_tr = "Введите числитель дроби: ";
-	string denom_tr = "Введите знаменатель дроби: ";*/
 	cin >> integer >> numerator >> denominator;
 	obj.set_integer(integer);
 	obj.set_numerator(numerator);
 	obj.set_denominator(denominator);
-	return cin;
+	return cin.;
 }
 
 //#define CONSTRUCTORS_CHECK
