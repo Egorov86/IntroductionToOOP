@@ -1,4 +1,5 @@
 ﻿//Fraction
+#define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
 #pragma warning(disable:4326)
 using namespace std;
@@ -294,14 +295,30 @@ std::ostream& operator<<(std::ostream& os, const Fraction& obj)
 	return os;
 }
 
-std::istream& operator>>(std::istream& cin, Fraction& obj)         //Класс istream  обеспечивает работу потоков соответственно ввода.
+std::istream& operator>>(std::istream& is, Fraction& obj)         //Класс istream  обеспечивает работу потоков соответственно ввода.
 {                                                          
-	int integer, numerator, denominator;
-	cin >> integer >> numerator >> denominator;
-	obj.set_integer(integer);
-	obj.set_numerator(numerator);
-	obj.set_denominator(denominator);
-	return cin;
+	const int SIZE = 32;
+	char buffer[SIZE]{};
+	is.getline(buffer, SIZE);
+	int number[3];
+	int n = 0;
+	const char delimetrs[] = "(/) +.,";
+	for (char* pch = strtok(buffer, delimetrs); pch; pch = strtok(NULL, delimetrs))
+		// Функция strtok() разделяет строку на токены:
+		// !!! Функция strtok() ИЗМЕНЯЕТ ВХОДНУЮ СТРОКУ !!!
+		number[n++] = atoi(pch);
+	    //pch - Pointer to Character (Указатель на символ)
+	    // функция atoi () - "ASCII string to int" принимает строку, 
+	    // и возвращает значение типа int найденное в этой строке
+	//legacy.cplusplus.com/reference/cstdlib/atoi/
+	//for (int i = 0; i < n; i++)cout << number[i] << "\t"; cout << endl;
+	switch (n)
+	{
+	case 1: obj = Fraction(number[0]); break;
+	case 2: obj = Fraction(number[0], number[1]); break;
+	case 3: obj = Fraction(number[0], number[1], number[2]); break;
+	}
+	return is;
 }
 
 //#define CONSTRUCTORS_CHECK
