@@ -1,5 +1,6 @@
 ﻿//Fraction
 #define _CRT_SECURE_NO_WARNINGS
+#define delimitr cout <<\n---------------------------\n << endl;
 #include<iostream>
 #pragma warning(disable:4326)
 using namespace std;
@@ -59,7 +60,7 @@ public:
 	    denominator = 1;
 		cout << "DefaultConstructor:\t" << this << endl;
 	}
-	Fraction(int integer)
+	explicit Fraction(int integer)
 	{
 		this->integer = integer;
 		this->numerator = 0;
@@ -153,8 +154,22 @@ public:
 		to_proper();
 		return *this;
 	}*/
-
+	/* ____________________________________
+	operator type()
+	{
+	     .....;
+	     .....;
+		 return value;
+	}
+	_______________________________________
+	*/
+	//      Typer-cast operator
+	explicit operator int()
+	{
+		return integer;
+	}
 	//       Method:
+
 	Fraction& reduce()
 	{
 		int more, less, rest;
@@ -324,7 +339,11 @@ std::istream& operator>>(std::istream& is, Fraction& obj)         //Класс i
 //#define CONSTRUCTORS_CHECK
 //#define ARIFMETICAL_OPERATORS_CHEK
 //#define COMPARISON_OPERATORS_CHECK
-#define STREAMS_CHECK
+//#define STREAMS_CHECK
+//#define CONVERSIONS_FROM_OTHER_TO_CLASS
+//#define CONVERSIONS_TASK_1
+//#define CONVERSIONS_TASK_2
+
 
 void main()
 {
@@ -399,5 +418,37 @@ void main()
 
 
 #endif // STREAMS_CHECK
+
+#ifdef TYPE_CONVERSION_BASICS
+	int a = 2;    //No conversions
+	double b = 3; //Conversions from less to more
+	int c = b;    //Conversions from more to less without data loss
+	int d = 2.5;  //Conversions from more to less with data loss
+	cout << sizeof(int) << endl;      // 4 байта
+	cout << sizeof(double) << endl;   // 8 байт  
+#endif // TYPE_CONVERSION_BASICS
+#ifdef CONVERSIONS_FROM_OTHER_TO_CLASS
+
+	Fraction A = (Fraction)5;
+	cout << "\n-------------------------------------------\n" << endl;
+	Fraction B;
+	B = Fraction(8);
+	cout << "\n-------------------------------------------\n" << endl;
+#endif // CONVERSIONS_FROM_OTHER_TO_CLASS
+
+#ifdef CONVERSIONS_TASK_1
+	Fraction A(2, 3, 4);
+	cout << A << endl;
+	//int a = (int)A;
+	double a = A
+	//cout << a << endl;
+
+	cout << a << endl;
+#endif // CONVERSIONS_TASK_1
+
+#ifdef CONVERSIONS_TASK_2
+	Fraction B = 2.75;
+	cout << B << endl;
+#endif // CONVERSIONS_TASK_2
 
 }
