@@ -14,32 +14,22 @@ public:
 		this->str = new char[size] {};
 		cout << "DefaultConstructor:\t" << this << endl;
 	}
+
 	~String()
 	{
 		delete[] this->str;
 		cout << "Destructor:\t\t" << this << endl;
 	}
-
-	//              Methods:
 	void print()const
 	{
-		cout << "Size:\t" << size << endl;
-		cout << "Str:\t" << str << endl;
+
 	}
 };
-
+	//              Methods:
+	
 void main()
 {
 	setlocale(LC_ALL, "");
-	//String str;
-	//str.print();
-
-	String str1 = "Hello";
-	String str2 = "World";
-	cout << str1 << endl;
-	cout << str2 << endl;
-
-	String str3 = str1 + str2;
-	cout << str3 << endl;          // HelloWorld
+	
 
 }
