@@ -18,13 +18,13 @@ public:
 		this->str = new char[size] {};
 		cout << "DefaultConstructor:\t" << this << endl;
 	}
-	//String(const char* str)
-	//{
-	//	size = strlen(str) + 1;  //Функция strlen () возвращает количество символов строки (без учета концевого нулевого байта).
-	//	this->str = new char[size];
-	//	strcpy_s(this->str, size, str);
-	//	cout << "Constructor" << this << endl;
-	//}
+	String(const char* str)
+	{
+		size = strlen(str) + 1;  //Функция strlen () возвращает количество символов строки (без учета концевого нулевого байта).
+		this->str = new char[size];
+		strcpy_s(this->str, size, str);
+		cout << "Constructor" << this << endl;
+	}
 	String(char* str)
 	{
 		int len = strlen(str);
@@ -93,8 +93,8 @@ void main()
 {
 	setlocale(LC_ALL, "");
 	
-	//String str;
-	//str.print();
+	String str;
+	str.print();
 	cout << delimitr << endl;
 	String str1 = (char)"Hello";
 	String str2 = (char)"World";

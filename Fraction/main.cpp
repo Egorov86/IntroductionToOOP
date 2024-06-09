@@ -82,6 +82,13 @@ public:
 		this->set_denominator(denominator); // фильтрация данных 0 преобразуем в 1
 		cout << "Constructor:\t\t" << this << endl;
 	}
+	explicit Fraction(int integer, double numerator, int denominator)
+	{
+		this->integer = integer;
+		this->numerator = numerator;
+		this->set_denominator(denominator); // фильтрация данных 0 преобразуем в 1
+		cout << "Constructor:\t\t" << this << endl;
+	}
 	Fraction(const Fraction& other)
 	{
 		this->integer = other.integer;
