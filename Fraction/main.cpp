@@ -1,6 +1,7 @@
 ﻿//Fraction
 #define _CRT_SECURE_NO_WARNINGS
-#define delimitr cout <<\n---------------------------\n << endl;
+#define delimitr "\n---------------------------\n"
+#define double_delimitr "\n=======================\n"
 #include<iostream>
 #pragma warning(disable:4326)
 using namespace std;
@@ -74,7 +75,7 @@ public:
 		this->set_denominator(denominator);
 		cout << "Constructor:\t\t" << this << endl;
 	}
-	Fraction(int integer, int numerator, int denominator)
+	explicit Fraction(int integer, int numerator, int denominator)
 	{
 		this->integer = integer;
 		this->numerator = numerator;
@@ -167,6 +168,11 @@ public:
 	explicit operator int()
 	{
 		return integer;
+	}
+	explicit operator double()
+	{
+		double doubleNUM = (integer + double(numerator) /denominator);
+		return doubleNUM;
 	}
 	//       Method:
 
@@ -341,8 +347,8 @@ std::istream& operator>>(std::istream& is, Fraction& obj)         //Класс i
 //#define COMPARISON_OPERATORS_CHECK
 //#define STREAMS_CHECK
 //#define CONVERSIONS_FROM_OTHER_TO_CLASS
-//#define CONVERSIONS_TASK_1
-//#define CONVERSIONS_TASK_2
+#define CONVERSIONS_TASK_1
+#define CONVERSIONS_TASK_2
 
 
 void main()
@@ -440,14 +446,14 @@ void main()
 	Fraction A(2, 3, 4);
 	cout << A << endl;
 	//int a = (int)A;
-	double a = A
-	//cout << a << endl;
+	double a = (double)A;
+	cout << a << endl;
 
 	cout << a << endl;
 #endif // CONVERSIONS_TASK_1
 
 #ifdef CONVERSIONS_TASK_2
-	Fraction B = 2.75;
+	Fraction B = (Fraction)2.75;
 	cout << B << endl;
 #endif // CONVERSIONS_TASK_2
 
