@@ -25,16 +25,16 @@ public:
 		strcpy_s(this->str, size, str);
 		cout << "Constructor" << this << endl;
 	}
-	String(char* str)
-	{
-		int len = strlen(str);
-		this->str = new char[len+1];   // +1 под терминирующий ноль
-		for (int i = 0; i < len; i++)
-		{
-			this->str[i] = str[i];
-		}
-		this->str[len] = '\0';
-	}
+	//String(char* str)
+	//{
+	//	int len = strlen(str);
+	//	this->str = new char[len+1];   // +1 под терминирующий ноль
+	//	for (int i = 0; i < len; i++)
+	//	{
+	//		this->str[i] = str[i];
+	//	}
+	//	this->str[len] = '\0';
+	//}
 
 	~String()
 	{

@@ -1,4 +1,5 @@
 ﻿//Fraction
+#define _USE_MATH_DEFINES
 #define _CRT_SECURE_NO_WARNINGS
 #define delimitr "\n---------------------------\n"
 #define double_delimitr "\n=======================\n"
@@ -67,6 +68,17 @@ public:
 		this->numerator = 0;
 		this->denominator = 1;
 		cout << "1ArgConstructor:\t" << this << endl;
+	}
+	Fraction(double decimal)
+	{
+		decimal += 1e-10;    // выравнивание числа
+		integer = decimal;
+		decimal -= integer;
+		denominator = 1e+9;
+		numerator = decimal * denominator;
+		reduce();
+		cout << "Constructor:\t " << this << endl;
+
 	}
 	Fraction(int numerator, int denominator)
 	{
@@ -176,6 +188,10 @@ public:
 	{
 		return integer;
 	}
+	/*operator doudle()
+	{
+		return integer + (double)numerator / denominator;
+	}*/
 	explicit operator double()
 	{
 		double doubleNUM = (integer + double(numerator) /denominator);
@@ -354,7 +370,7 @@ std::istream& operator>>(std::istream& is, Fraction& obj)         //Класс i
 //#define COMPARISON_OPERATORS_CHECK
 //#define STREAMS_CHECK
 //#define CONVERSIONS_FROM_OTHER_TO_CLASS
-#define CONVERSIONS_TASK_1
+//#define CONVERSIONS_TASK_1
 #define CONVERSIONS_TASK_2
 
 
@@ -453,14 +469,14 @@ void main()
 	Fraction A(2, 3, 4);
 	cout << A << endl;
 	//int a = (int)A;
-	double a = (double)A;
+	double a = A;
 	cout << a << endl;
 
 	cout << a << endl;
 #endif // CONVERSIONS_TASK_1
 
 #ifdef CONVERSIONS_TASK_2
-	Fraction B = (Fraction)2.75;
+	Fraction B = M_PI;
 	cout << B << endl;
 #endif // CONVERSIONS_TASK_2
 
