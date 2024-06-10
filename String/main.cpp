@@ -11,6 +11,10 @@ class String //
 	int size; //размер строки в байтах
 	char* str; // Адрес строки в динамической памяти
 public:
+	const char* get_str()const
+	{
+		return str;
+	}
 	//                     Constructor:
 	String(int size = 80)
 	{
@@ -18,23 +22,13 @@ public:
 		this->str = new char[size] {};
 		cout << "DefaultConstructor:\t" << this << endl;
 	}
-	String(const char* str)
+	String(const char str[])
 	{
-		size = strlen(str) + 1;  //Функция strlen () возвращает количество символов строки (без учета концевого нулевого байта).
-		this->str = new char[size];
-		strcpy_s(this->str, size, str);
-		cout << "Constructor" << this << endl;
+		this ->size =  strlen(str) + 1;  //Функция strlen () возвращает количество символов строки (без учета концевого нулевого байта).
+		this->str = new char[size] {};
+		for (int i = 0; str[i]; i++) this->str[i] = str[i];
+		cout << "Constructor:\t\t" << this << endl;
 	}
-	//String(char* str)
-	//{
-	//	int len = strlen(str);
-	//	this->str = new char[len+1];   // +1 под терминирующий ноль
-	//	for (int i = 0; i < len; i++)
-	//	{
-	//		this->str[i] = str[i];
-	//	}
-	//	this->str[len] = '\0';
-	//}
 
 	~String()
 	{
@@ -43,21 +37,8 @@ public:
 	}
 
 	//                                Methods:
-	String& operator=(const String& other)
-	{
-		if (this->str != nullptr)
-		{
-			delete[] str;
-		}
-		int len = strlen(other.str);
-		this->str = new char[len + 1]; // для термин.нуля
-		for (int i = 0; i < len; i++)
-		{
-			this->str[i] = other.str[i];
-		}
-		this->str[len] = '\0';
-	}
-	String& operator+(const String& other)
+	
+	/*String& operator+(const String& other)
 	{
 		String newSTR;
 
@@ -76,7 +57,7 @@ public:
 		}
 		newSTR.str[thislen + otherlen] = '\0';
 		return newSTR;
-	}
+	}*/
 	void print()const
 	{
 		cout << "Size:\t" << size << endl;
@@ -86,7 +67,7 @@ public:
 
 std::ostream& operator<<(std::ostream& os, const String& obj)
 {
-	return os;
+	return os <<obj.get_str();
 }
 
 void main()
@@ -95,17 +76,19 @@ void main()
 	
 	String str;
 	str.print();
+	
 	cout << delimitr << endl;
-	String str1 = (char)"Hello";
-	String str2 = (char)"World";
+
+	String str1 = "Hello";
+	String str2 = "World";
 	//str1.print();
 	//str2.print();
 	cout << str1 << endl;
 	cout << str2 << endl;
 	
-	cout << delimitr;
+	/*cout << delimitr;
 	String str3 = (str1 + str2);
-	cout << str3 << endl;
+	cout << str3 << endl;*/
 	//str3.print();
 
 }
