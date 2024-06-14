@@ -52,6 +52,21 @@ public:
 		cout << "Destructor:\t\t" << this << endl;
 	}
 
+	                            //     Operators:
+	String& operator=(const String& other)
+	{
+		/*int a = 2;
+		int b = 3;
+		a = b;*/
+		if (this == &other)return *this;
+		delete[] str;
+		this->size = other.size;
+		this->str = new char[size] {};
+		for (int i = 0; i < size; i++)this->str[i] = other.str[i];
+		cout << "CopyAssignment:\t\t" << this << endl;
+		return *this;
+	}
+
 	                             //   Methods:
 	
 	void print()const
@@ -97,12 +112,16 @@ void main()
 	//str2.print();
 	//cout << str1 << endl;
 	//cout << str2 << endl;
-	
+	//String str3 = str1 + str2; // СopyConstructor
 	cout << delimitr << endl;
-	String str3 = str1 + str2; // СopyConstructor
+	String str3;
+	str1 = str1;
+	str3 = str1 + " " + str2; // СopyAssignment
 	cout << delimitr << endl;
-	//cout << str3 << "\t" << endl;
 	str3.print();
 	//str3.print();
+	cout << str1 << endl;
+	cout << str2 << endl;
+	cout << str3 << endl; // Hello World
 
 }
