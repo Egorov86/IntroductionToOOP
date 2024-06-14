@@ -36,34 +36,36 @@ public:
 		cout << "Destructor:\t\t" << this << endl;
 	}
 
-	//                                Methods:
+	                             //   Methods:
 	
-	/*String& operator+(const String& other)
-	{
-		String newSTR;
-
-		int thislen = strlen(this->str);
-		int otherlen = strlen(other.str);
-
-		newSTR.str = new char[thislen + otherlen + 1];
-		int i = 0;
-		for (; i < thislen; i++)
-		{
-			newSTR.str[i] = this->str[i];
-		}
-		for (int j = 0; j < otherlen; j++,i++)
-		{
-			newSTR.str[i] = other.str[j];
-		}
-		newSTR.str[thislen + otherlen] = '\0';
-		return newSTR;
-	}*/
+	
 	void print()const
 	{
 		cout << "Size:\t" << size << endl;
 		cout << "Str:\t" << str << endl;
 	}
 };
+
+/*String& operator+(const String& other)
+{
+	String newSTR;
+
+	int thislen = strlen(this->str);
+	int otherlen = strlen(other.str);
+
+	newSTR.str = new char[thislen + otherlen + 1];
+	int i = 0;
+	for (; i < thislen; i++)
+	{
+		newSTR.str[i] = this->str[i];
+	}
+	for (int j = 0; j < otherlen; j++,i++)
+	{
+		newSTR.str[i] = other.str[j];
+	}
+	newSTR.str[thislen + otherlen] = '\0';
+	return newSTR;
+}*/
 
 std::ostream& operator<<(std::ostream& os, const String& obj)
 {
