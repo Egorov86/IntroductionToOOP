@@ -100,8 +100,10 @@ void main()
 	setlocale(LC_ALL, "rus");
 
 	Matrix matrix1(3, 4);
+	Matrix matrix2(3, 4);
 
 	cout << matrix1 << endl;
+	cout << matrix2 << endl;
 
 
 }
