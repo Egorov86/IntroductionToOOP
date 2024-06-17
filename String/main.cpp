@@ -59,7 +59,7 @@ public:
 		int b = 3;
 		a = b;*/
 		if (this == &other)return *this;
-		delete[] str;
+		this->~String();
 		this->size = other.size;
 		this->str = new char[size] {};
 		for (int i = 0; i < size; i++)this->str[i] = other.str[i];
