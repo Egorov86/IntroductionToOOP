@@ -18,10 +18,10 @@ public:
 	{
 		return cols;
 	}
-	const int** get_data()const
+	/*const int** get_data()const
 	{
 		return data;
-	}
+	}*/
 	int** get_data()
 	{
 		return data;
@@ -34,20 +34,24 @@ public:
 	{
 		this->cols = cols;
 	}
-	            // Constructor
+	            // Constructors
 	Matrix(int rows = 2, int cols = 2)    // Конструктор с параметрами
 	{
+		this->rows = rows;
+		this->cols = cols;
 		data = new int* [rows];
 			for (int i = 0; i < rows; i++)
 			{
-				data[i] = new int[cols];
+				data[i] = new int [cols];
 			}
 			cout << "Constructor: " << this << endl;
 	}
 
-	/*Matrix(const Matrix& other) // Конструктор копирования
+	Matrix(const Matrix& other)          // Конструктор копирования
 	{
-		data = new int*[rows]
+		this->rows = other.rows;
+		this->cols = other.cols;
+		data = new int* [rows];
 			for (int i = 0; i < rows; i++)
 			{
 				data[i] = new int[cols];
@@ -56,25 +60,38 @@ public:
 					data[i][j] = other.data[i][j];
 				}
 			}
-	}*/
+			cout << "CopyConstructor: " << this << endl;
+	}
+	~Matrix()                   // Деструктор
+	{
+		for (int i = 0; i < rows; i++)
+		{
+			delete[] data[i];
+		}
+		delete[] data;
+		cout << "Destructor: " << this << endl;
+	}
 
 
 };
 
 std::ostream& operator<<(std::ostream& os, const Matrix& obj)
 {
-    int rows = obj.get_rows();
+	int rows = obj.get_rows();
 	int cols = obj.get_cols();
 	for (int i = 0; i < rows; i++)
 	{
+		os << "\n";
 		for (int j = 0; j < cols; j++)
 		{
 			{
-				os << obj.data[i][j] << "\t";
+				os << rand() % 30 << " ";
 			}
-			os << "\n";
 		}
 	}
+	cout << "\n";
+	cout << delimitr << endl;
+	cout << "Operator: " << " <<" << endl;
 	return os;
 }
 
@@ -82,7 +99,7 @@ void main()
 {
 	setlocale(LC_ALL, "rus");
 
-	Matrix matrix1(2, 3);
+	Matrix matrix1(3, 4);
 
 	cout << matrix1 << endl;
 
