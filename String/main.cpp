@@ -24,24 +24,24 @@ public:
 		return str;
 	}
 	//                     Constructor:
-	explicit String(int size = 80)
+	explicit String(int size = 80) : size(size), str(new char[size] {}) //this->size=size
 	{
-		this->size = size;
-		this->str = new char[size] {};
+		//this->size = size;
+		//this->str = new char[size] {};
 		cout << "DefaultConstructor:\t" << this << endl;
 	}
-	String(const char str[])
+	String(const char str[]) : size(strlen(str) + 1), str(new char[size] {})
 	{
-		this ->size =  strlen(str) + 1;  //Функция strlen () возвращает количество символов строки (без учета концевого нулевого байта).
-		this->str = new char[size] {};
+		//this ->size =  strlen(str) + 1;  //Функция strlen () возвращает количество символов строки (без учета концевого нулевого байта).
+		//this->str = new char[size] {};
 		for (int i = 0; str[i]; i++) this->str[i] = str[i];
 		cout << "Constructor:\t\t" << this << endl;
 	}
-	String(const String& other)
+	String(const String& other) :size(other.size), str(new char[size] {})
 	{
 		// Deep copy
-		this->size = other.size;
-		this->str = new char[size] {};
+		//this->size = other.size;
+		//this->str = new char[size] {};
 		for (int i = 0; i < size; i++)this->str[i] = other.str[i];
 		cout << "CopyConstructor:\t" << this << endl;
 	}
@@ -95,15 +95,41 @@ String operator+(const String& left, const String& right)
 	return buffer;
 
 }
-
+#define CONSTRUCTORS_CHECK
+//#define CAT_CHECK
 
 void main()
 {
 	setlocale(LC_ALL, "rus");
+#ifdef CONSTRUCTORS_CHECK
+
+
+	String str1;    //Default Constructor
+	str1.print();
+
+	String str2(8);        // Single-Assinment Constructor
+	str2.print();
 	
+	String str3 = "Hello";  // Single-Assinment Constructor
+	str3.print();
+
+	String str4();       // Здесь не создаётся объект, и не вызывается конструктор
+	                     // в этом выражении объявляется функция str4()
+	//str4.print();        // которая ничего не принимает, и возвращает объект класса 'String'.
+
+	String str5{};
+	str5.print();
+
+	String str6{ str3 };  // CopyConstructor, в фигурных скобках то что передаем
+	str6.print();
+
+
+#endif // CONSTRUCTORS_CHECK
+
+#ifdef CAT_CHECK
 	String str;
 	str.print();
-	
+
 	cout << delimitr << endl;
 
 	String str1 = "Hello";
@@ -123,5 +149,6 @@ void main()
 	cout << str1 << endl;
 	cout << str2 << endl;
 	cout << str3 << endl; // Hello World
+#endif // CAT_CHECK
 
 }
