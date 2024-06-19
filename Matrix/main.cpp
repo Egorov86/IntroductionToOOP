@@ -42,7 +42,7 @@ public:
         }
         cout << "Конcтруктор с параметрами: " << this << "\n";
     }
-    Matrix(const Matrix& obj) :Matrix(rows, cols)
+    Matrix(const Matrix& obj) :Matrix(obj.rows, obj.cols)
     {
         //this->rows = obj.rows;
         //this->cols = obj.cols;
