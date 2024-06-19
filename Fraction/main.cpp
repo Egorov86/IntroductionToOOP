@@ -105,11 +105,11 @@ Fraction()
 	denominator = 1;
 	cout << "DefaultConstructor:\t" << this << endl;
 }
-explicit Fraction(int integer)
+explicit Fraction(int integer):integer(integer), numerator(0), denominator(1)
 {
-	this->integer = integer;
+	/*this->integer = integer;
 	this->numerator = 0;
-	this->denominator = 1;
+	this->denominator = 1;*/
 	cout << "1ArgConstructor:\t" << this << endl;
 }
 Fraction::Fraction(double decimal)
@@ -123,11 +123,11 @@ Fraction::Fraction(double decimal)
 	cout << "Constructor:\t " << this << endl;
 
 }
-Fraction::Fraction(int numerator, int denominator)
+Fraction::Fraction(int numerator, int denominator):integer(0), numerator(numerator), set_denominator(denominator)
 {
-	this->integer = 0;
+	/*this->integer = 0;
 	this->numerator = numerator;
-	this->set_denominator(denominator);
+	this->set_denominator(denominator);*/
 	cout << "Constructor:\t\t" << this << endl;
 }
 explicit Fraction(int integer, int numerator, int denominator)
